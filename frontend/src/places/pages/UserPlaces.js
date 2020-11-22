@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../shared/components/UIElements/Card";
+import { useParams } from "react-router-dom";
 import PlaceList from "../components/PlaceList";
 
 const DUMMY_PLACES = [
@@ -23,7 +23,7 @@ const DUMMY_PLACES = [
     imageUrl:
       "https://res.cloudinary.com/dwzmsvp7f/image/upload/v1571728597/uojq9gbuamwq2fq7qqjt.jpg",
     address: "Murshidabad, West Bengal 742149",
-    creator: "u1",
+    creator: "u2",
     location: {
       lat: 24.1877078,
       lng: 88.2616207,
@@ -32,7 +32,9 @@ const DUMMY_PLACES = [
 ];
 
 const UserPlaces = () => {
-  return <PlaceList items={DUMMY_PLACES} />;
+  const userId = useParams().userId;
+  const loadedPlaces = DUMMY_PLACES.filter((place) => place.creator === userId);
+  return <PlaceList items={loadedPlaces} />;
 };
 
 export default UserPlaces;
